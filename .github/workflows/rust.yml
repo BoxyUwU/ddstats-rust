@@ -1,9 +1,8 @@
 name: Rust
 
 on:
-  pull_request:
-    branches: [master]
-    types: ['ready_for_review']
+  push:
+    branches: [main]
 
 env:
   CARGO_TERM_COLOR: always
@@ -36,30 +35,22 @@ jobs:
             override: true
             components: rustfmt, clippy
       - uses: actions-rs/cargo@v1
-        env:
-          DDCL_SECRETS_IV: ${{ secrets.DDCL_SECRETS_IV }}
-          DDCL_SECRETS_SALT: ${{ secrets.DDCL_SECRETS_SALT }}
-          DDCL_SECRETS_PASS: ${{ secrets.DDCL_SECRETS_PASS }}
         with:
           use-cross: true
           command: build
           args: --release --target=x86_64-unknown-linux-gnu
       - uses: actions-rs/cargo@v1
-        env:
-          DDCL_SECRETS_IV: ${{ secrets.DDCL_SECRETS_IV }}
-          DDCL_SECRETS_SALT: ${{ secrets.DDCL_SECRETS_SALT }}
-          DDCL_SECRETS_PASS: ${{ secrets.DDCL_SECRETS_PASS }}
         with:
           use-cross: true
           command: build
           args: --release --target=x86_64-pc-windows-gnu
       - name: Archive compiled data
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: ddstats-rust-linux
           path: target/x86_64-unknown-linux-gnu/release/ddstats-rust
       - name: Archive compiled data (windows)
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: ddstats-rust-windows
           path: target/x86_64-pc-windows-gnu/release/ddstats-rust.exe
@@ -67,10 +58,9 @@ jobs:
         run: sh .github/workflows/package.sh
       - uses: ncipollo/release-action@v1
         with:
-          commit: master
+          commit: main
           tag: v0.6.10-${{ github.run_number }}
           artifacts: "ddstats-rust-linux-x86_64.zip,ddstats-rust-windows-x86_64.zip"
           preRelease: false
-          draft: true
           generateReleaseNotes: true
           token: ${{ secrets.GITHUB_TOKEN }}
