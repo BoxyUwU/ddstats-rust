@@ -2,7 +2,7 @@ name: Rust
 
 on:
   pull_request:
-    branches: [master]
+    branches: [main]
     types: ['ready_for_review']
 
 env:
@@ -36,19 +36,11 @@ jobs:
             override: true
             components: rustfmt, clippy
       - uses: actions-rs/cargo@v1
-        env:
-          DDCL_SECRETS_IV: ${{ secrets.DDCL_SECRETS_IV }}
-          DDCL_SECRETS_SALT: ${{ secrets.DDCL_SECRETS_SALT }}
-          DDCL_SECRETS_PASS: ${{ secrets.DDCL_SECRETS_PASS }}
         with:
           use-cross: true
           command: build
           args: --release --target=x86_64-unknown-linux-gnu
       - uses: actions-rs/cargo@v1
-        env:
-          DDCL_SECRETS_IV: ${{ secrets.DDCL_SECRETS_IV }}
-          DDCL_SECRETS_SALT: ${{ secrets.DDCL_SECRETS_SALT }}
-          DDCL_SECRETS_PASS: ${{ secrets.DDCL_SECRETS_PASS }}
         with:
           use-cross: true
           command: build
@@ -73,4 +65,3 @@ jobs:
           preRelease: false
           draft: true
           generateReleaseNotes: true
-          token: ${{ secrets.GITHUB_TOKEN }}
