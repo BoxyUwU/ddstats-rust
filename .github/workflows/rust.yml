@@ -21,6 +21,8 @@ jobs:
         run: | 
             apt list --installed | grep ssl
             openssl version
+            pkg-config --modversion libssl
+            pkg-config --modversion openssl
       - name: Install latest rust
         uses: actions-rs/toolchain@v1
         with:
