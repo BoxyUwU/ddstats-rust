@@ -19,6 +19,7 @@ jobs:
         run: docker build -t cross-rust-windows docker/windows
       - name: Test
         run: apt list --installed | grep ssl
+        run: openssl version
       - name: Install latest rust
         uses: actions-rs/toolchain@v1
         with:
