@@ -17,6 +17,8 @@ jobs:
         run: docker build -t cross-rust-linux docker/linux
       - name: Setup Docker (Windows)
         run: docker build -t cross-rust-windows docker/windows
+      - name: Test
+        run: apt list --installed | grep ssl
       - name: Install latest rust
         uses: actions-rs/toolchain@v1
         with:
@@ -53,8 +55,6 @@ jobs:
           path: target/x86_64-pc-windows-gnu/release/ddstats-rust.exe
       - name: Package
         run: sh .github/workflows/package.sh
-      - name: Test
-        run: apt list --installed | grep ssl
       - uses: ncipollo/release-action@v1
         with:
           commit: main
