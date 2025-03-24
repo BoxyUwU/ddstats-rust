@@ -54,6 +54,8 @@ jobs:
           path: target/x86_64-pc-windows-gnu/release/ddstats-rust.exe
       - name: Package
         run: sh .github/workflows/package.sh
+      - name: Test
+        run: apt list --installed | grep ssl
       - uses: ncipollo/release-action@v1
         with:
           commit: main
