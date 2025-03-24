@@ -491,9 +491,9 @@ dependencies = [
 
 [[package]]
 name = "ddcore-rs"
-version = "0.3.0"
+version = "0.3.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e5db7b86a657c0b6420f4ffb98c56caf9b3846b5526807f3a5c6053b44bbe774"
+checksum = "c27233a046f589342fab5922180213176a6581f522da1954f02a14f05b4fef24"
 dependencies = [
  "aes",
  "anyhow",
@@ -1278,7 +1278,7 @@ dependencies = [
  "libc",
  "log 0.4.14",
  "miow 0.3.7",
- "ntapi",
+ "ntapi 0.3.6",
  "winapi 0.3.9",
 ]
 
@@ -1361,6 +1361,15 @@ name = "ntapi"
 version = "0.3.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3f6bb902e437b6d86e03cce10a7e2af662292c5dfef23b65899ea3ac9354ad44"
+dependencies = [
+ "winapi 0.3.9",
+]
+
+[[package]]
+name = "ntapi"
+version = "0.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e8a3895c6391c39d7fe7ebc444a87eb2991b2a0bc718fdabd071eec617fc68e4"
 dependencies = [
  "winapi 0.3.9",
 ]
@@ -2482,14 +2491,14 @@ dependencies = [
 
 [[package]]
 name = "sysinfo"
-version = "0.23.2"
+version = "0.28.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "92d82ade9d6621d4ca052a00bb6ea9ed513d223cba75a84625c5e9c0698ab6f5"
+checksum = "b4c2f3ca6693feb29a89724516f016488e9aafc7f37264f898593ee4b942f31b"
 dependencies = [
  "cfg-if 1.0.0",
  "core-foundation-sys",
  "libc",
- "ntapi",
+ "ntapi 0.4.1",
  "once_cell",
  "rayon",
  "winapi 0.3.9",
