@@ -43,8 +43,9 @@ clap = { version = "3.0.14", features = ["derive"] }
 chashmap = "2.2"
 
 [target.'cfg(windows)'.dependencies]
+# trayicon released a breaking change in version "0.1.5" so depend on an exact version 
+trayicon = { version = "=0.1.3", features = [] }
 winapi = { version = "0.3.9", features = ["tlhelp32", "winuser", "wincon"] }
-trayicon = { version = "0.1.3", features = [] }
 winconsole = "0.11.1"
 winreg = "0.10.1"
 
