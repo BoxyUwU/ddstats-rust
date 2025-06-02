@@ -17,12 +17,6 @@ jobs:
         run: docker build -t cross-rust-linux docker/linux
       - name: Setup Docker (Windows)
         run: docker build -t cross-rust-windows docker/windows
-      - name: Test
-        run: | 
-            apt list --installed | grep ssl
-            openssl version -d
-            pkg-config --modversion libssl
-            pkg-config --modversion openssl
       - name: Install latest rust
         uses: actions-rs/toolchain@v1
         with:
@@ -45,6 +39,11 @@ jobs:
           use-cross: true
           command: build
           args: --release --target=x86_64-unknown-linux-gnu
+        run: | 
+            apt list --installed | grep ssl
+            openssl version -d
+            pkg-config --modversion libssl
+            pkg-config --modversion openssl
       - uses: actions-rs/cargo@v1
         with:
           use-cross: true
