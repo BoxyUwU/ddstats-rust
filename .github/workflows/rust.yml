@@ -38,6 +38,9 @@ jobs:
             override: true
             components: rustfmt, clippy
       - uses: actions-rs/cargo@v1
+        env:
+          OPENSSL_DIR: '/usr/lib/ssl'
+          OPENSSL_STATIC: true
         with:
           use-cross: true
           command: build
