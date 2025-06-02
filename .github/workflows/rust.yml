@@ -10,25 +10,14 @@ env:
 jobs:
   build-release:
     name: Build & Release
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v2
-      - name: Install latest rust
-        uses: actions-rs/toolchain@v1
-        with:
-            target: x86_64-unknown-linux-gnu
-            toolchain: nightly
-            override: true
-            components: rustfmt, clippy
-      - name: Install latest cross
-        run: cargo install cross
-      - name: Install openssl and deps
-        run: sudo apt-get install libx11-xcb-dev libgl1-mesa-dev xorg-dev openssl libssl-dev pkg-config python3
-      - uses: actions-rs/cargo@v1
-        with:
-          use-cross: true
-          command: build
-          args: --release --target=x86_64-unknown-linux-gnu
+      - name: Build (x86_64-unknown-linux-musl)
+        run: |
+              sudo apt-get update
+              sudo apt-get install --assume-yes libx11-xcb-dev libgl1-mesa-dev xorg-dev openssl libssl-dev pkg-config python3
+              rustup target install x86_64-unknown-linux-musl
+              cargo build --release --target=x86_64-unknown-linux-musl
       - name: Archive compiled data
         uses: actions/upload-artifact@v4
         with:
