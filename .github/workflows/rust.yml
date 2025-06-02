@@ -23,6 +23,7 @@ jobs:
             openssl version
             pkg-config --modversion libssl
             pkg-config --modversion openssl
+            which openssl
       - name: Install latest rust
         uses: actions-rs/toolchain@v1
         with:
