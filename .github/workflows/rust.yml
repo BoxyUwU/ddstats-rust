@@ -13,8 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Setup Docker (Linux)
-        run: docker build -t cross-rust-linux docker/linux
+      # - name: Setup Docker (Linux)
+      #   run: docker build -t cross-rust-linux docker/linux
       - name: Setup Docker (Windows)
         run: docker build -t cross-rust-windows docker/windows
       - name: Install latest rust
@@ -32,9 +32,6 @@ jobs:
             override: true
             components: rustfmt, clippy
       - uses: actions-rs/cargo@v1
-        env:
-          OPENSSL_DIR: '/usr/lib/ssl'
-          OPENSSL_STATIC: true
         with:
           use-cross: true
           command: build
