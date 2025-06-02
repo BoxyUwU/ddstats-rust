@@ -12,6 +12,7 @@ jobs:
     name: Build & Release
     runs-on: ubuntu-24.04
     steps:
+      - uses: actions/checkout@v2
       - name: Build (x86_64-unknown-linux-musl)
         run: |
               sudo apt-get update
