@@ -39,11 +39,6 @@ jobs:
           use-cross: true
           command: build
           args: --release --target=x86_64-unknown-linux-gnu
-        run: | 
-            apt list --installed | grep ssl
-            openssl version -d
-            pkg-config --modversion libssl
-            pkg-config --modversion openssl
       - uses: actions-rs/cargo@v1
         with:
           use-cross: true
