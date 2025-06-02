@@ -20,10 +20,9 @@ jobs:
       - name: Test
         run: | 
             apt list --installed | grep ssl
-            openssl version
+            openssl version -d
             pkg-config --modversion libssl
             pkg-config --modversion openssl
-            which openssl
       - name: Install latest rust
         uses: actions-rs/toolchain@v1
         with:
