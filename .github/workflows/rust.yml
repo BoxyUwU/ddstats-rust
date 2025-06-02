@@ -16,7 +16,7 @@ jobs:
       - name: Build (x86_64-unknown-linux-musl)
         run: |
           docker build -t cross-rust-linux docker/linux
-          docker run --rm -v "$(pwd)":/src --user $(id -u):$(id -g) cross-rust-linux cargo build --release
+          sudo docker run --rm -v "$(pwd)":/src --user $(id -u):$(id -g) cross-rust-linux cargo build --release
       - name: Archive compiled data
         uses: actions/upload-artifact@v4
         with:
