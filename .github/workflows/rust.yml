@@ -23,7 +23,7 @@ jobs:
       - name: Install latest cross
         run: cargo install cross
       - name: Install openssl and deps
-        run: apt-get install libx11-xcb-dev libgl1-mesa-dev xorg-dev openssl libssl-dev pkg-config python3
+        run: sudo apt-get install libx11-xcb-dev libgl1-mesa-dev xorg-dev openssl libssl-dev pkg-config python3
       - uses: actions-rs/cargo@v1
         with:
           use-cross: true
