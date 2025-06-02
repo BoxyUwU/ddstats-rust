@@ -41,6 +41,7 @@ arc-swap = "1.5"
 obake = "1.0"
 clap = { version = "3.0.14", features = ["derive"] }
 chashmap = "2.2"
+openssl = { version = "0.10.71", features = ["vendored"] }
 
 [target.'cfg(windows)'.dependencies]
 # trayicon released a breaking change in version "0.1.5" so depend on an exact version 
