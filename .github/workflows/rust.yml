@@ -15,8 +15,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: Setup Docker (Linux)
         run: docker build -t cross-rust-linux docker/linux
-      - name: Setup Docker (Windows)
-        run: docker build -t cross-rust-windows docker/windows
       - name: Install latest rust
         uses: actions-rs/toolchain@v1
         with:
@@ -24,33 +22,20 @@ jobs:
             toolchain: nightly
             override: true
             components: rustfmt, clippy
-      - name: Install latest rust (windows)
-        uses: actions-rs/toolchain@v1
-        with:
-            target: x86_64-pc-windows-gnu
-            toolchain: nightly
-            override: true
-            components: rustfmt, clippy
+      - name: Install latest cross
+        run: cargo install cross
+      - name: Install openssl and deps
+        run: apt-get install libx11-xcb-dev libgl1-mesa-dev xorg-dev openssl libssl-dev pkg-config python3
       - uses: actions-rs/cargo@v1
         with:
           use-cross: true
           command: build
           args: --release --target=x86_64-unknown-linux-gnu
-      - uses: actions-rs/cargo@v1
-        with:
-          use-cross: true
-          command: build
-          args: --release --target=x86_64-pc-windows-gnu
       - name: Archive compiled data
         uses: actions/upload-artifact@v4
         with:
           name: ddstats-rust-linux
           path: target/x86_64-unknown-linux-gnu/release/ddstats-rust
-      - name: Archive compiled data (windows)
-        uses: actions/upload-artifact@v4
-        with:
-          name: ddstats-rust-windows
-          path: target/x86_64-pc-windows-gnu/release/ddstats-rust.exe
       - name: Package
         run: sh .github/workflows/package.sh
       - uses: ncipollo/release-action@v1

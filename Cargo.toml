@@ -53,11 +53,3 @@ winreg = "0.10.1"
 tonic-build = { version = "0.6.2", features = ["prost"] }
 target_build_utils = "0.3.1"
 winres = "0.1"
-
-
-
-[workspace.metadata.cross.target.x86_64-unknown-linux-gnu]
-pre-build = [
-    "dpkg --add-architecture $CROSS_DEB_ARCH",
-    "apt-get update && apt-get --asumme-yes install libx11-xcb-dev libgl1-mesa-dev xorg-dev openssl:$CROSS_DEB_ARCH libssl-dev:$CROSS_DEB_ARCH pkg-config python3"
-]
